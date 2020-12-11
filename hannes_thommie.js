@@ -23,24 +23,52 @@ const printGameBoard = () => {
       arr[i][j] = div;
     }
   }
-  //   document.body.appendChild(gameBoard);
+  document.body.appendChild(gameBoard);
   return arr;
 };
 //-----------------
 let santaPos = ""; //value of box where santa is
-
-const moveSanta = (id) => {
+const tomteString = `<div id="tomte"></div>`;
+const moveSanta = (target) => {
+  target.innerHTML = tomteString;
+  gameBoard.forEach((arr) =>
+    arr.forEach((position) => {
+      if (position.id == santaPos) {
+        position.innerHTML = "";
+      }
+    })
+  );
   // find boardBox with id of id
   // delete santa from where he is
   // create santa in boardBox
-  santaPos = id;
+  santaPos = target.id;
 };
 
 const gameBoard = printGameBoard();
 
+const showLastPos = (pos) => {
+  gameBoard.forEach((arr) =>
+    arr.forEach((position) => {
+      if (position.id == pos) {
+        console.log(position);
+        position.classList.add("guessed");
+      }
+    })
+  );
+};
 gameBoard.forEach((arr) =>
   arr.forEach((boardBox) => {
-    boardBox.addEventListener("click", (e) => alert(e.target.id));
+    boardBox.addEventListener("click", (e) => {
+      showLastPos(santaPos);
+      moveSanta(e.target);
+      // const guess = reindeerCheck();
+      // if (guess) {
+      //   // korrekt gissning, öka något
+      // } else {
+      // fel gissning öka något annat
+      // }
+      // alert(e.target.id);
+    });
   })
 );
 
