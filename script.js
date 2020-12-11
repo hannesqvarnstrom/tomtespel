@@ -8,6 +8,10 @@ const ren1 = document.querySelector(".ren");
 
 let correctCounter = 0;
 let guessesLeft = 20;
+let santaPos = "";
+let gameBoard;
+let reindeer;
+const main = document.querySelector("main");
 
 const printGameBoard = () => {
   let arr = [];
@@ -27,12 +31,12 @@ const printGameBoard = () => {
       arr[i][j] = div;
     }
   }
-  document.body.appendChild(gameBoard);
+  main.appendChild(gameBoard);
   return arr;
 };
 //-----------------
 
-let santaPos = ""; //value of box where santa is
+//value of box where santa is
 const tomteString = `<div id="tomte"></div>`;
 const moveSanta = (target) => {
   target.innerHTML = tomteString;
@@ -49,8 +53,6 @@ const moveSanta = (target) => {
   // create santa in boardBox
   santaPos = target.id;
 };
-
-const gameBoard = printGameBoard();
 
 const showLastPos = (pos) => {
   gameBoard.forEach((arr) =>
@@ -74,7 +76,7 @@ const insertReindeer = () => {
   }
   return reindeers;
 };
-let reindeer = insertReindeer();
+
 const reindeerCheck = (id) => {
   let isCorrect = false;
   let reindeerIndex = "";
@@ -95,29 +97,35 @@ const reindeerCheck = (id) => {
   );
   return isCorrect;
 };
-gameBoard.forEach((arr) =>
-  arr.forEach((boardBox) => {
-    boardBox.addEventListener("click", (e) => {
-      showLastPos(santaPos);
-      moveSanta(e.target);
-      e.target.disabled = true;
-      const guess = reindeerCheck(e.target.id);
-      console.log(guess);
-      //senare
-      if (guess) {
-        correctCounter++;
-      } else {
-        guessesLeft--;
-      }
-      if (guessesLeft == 0) {
-        gameOver();
-      } else if (correctCounter == 10) {
-        gameWon();
-      }
-      // alert(e.target.id);
-    });
-  })
-);
+const startGame = () => {
+  gameBoard = printGameBoard();
+  reindeer = insertReindeer();
+  gameBoard.forEach((arr) =>
+    arr.forEach((boardBox) => {
+      boardBox.addEventListener("click", (e) => {
+        showLastPos(santaPos);
+        moveSanta(e.target);
+        e.target.disabled = true;
+        const guess = reindeerCheck(e.target.id);
+        console.log(guess);
+        //senare
+        if (guess) {
+          correctCounter++;
+        } else {
+          guessesLeft--;
+        }
+        if (guessesLeft == 0) {
+          gameOver();
+        } else if (correctCounter == 10) {
+          gameWon();
+        }
+        // alert(e.target.id);
+      });
+    })
+  );
+  document.querySelector("#reset").addEventListener("click", () => resetGame());
+};
+startGame();
 
 const gameOver = () => {
   alert("Game over!");
@@ -125,7 +133,16 @@ const gameOver = () => {
 const gameWon = () => {
   alert("Game won!");
 };
-const removeReindeer = (id) => {};
+
+const resetGame = () => {
+  main.innerHTML = "";
+  correctCounter = 0;
+  guessesLeft = 20;
+  santaPos = "";
+  gameBoard = "";
+  reindeer = "";
+  startGame();
+};
 // gameBoard.forEach((square) => {
 //   square.forEach((innerSquare, j) => {
 //     let div = document.createElement("div");
