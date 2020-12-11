@@ -111,6 +111,7 @@ const startGame = () => {
         //senare
         if (guess) {
           correctCounter++;
+          document.querySelector("#counter").innerHTML = correctCounter;
         } else {
           guessesLeft--;
         }
