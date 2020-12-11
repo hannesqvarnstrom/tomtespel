@@ -6,6 +6,9 @@ const ren1 = document.querySelector(".ren");
 // logik! ligger tomten inuti en div?
 // tvådimensionell array
 
+let correctCounter = 0;
+let guessesLeft = 20;
+
 const printGameBoard = () => {
   let arr = [];
   let gameBoard = document.createElement("div");
@@ -73,11 +76,14 @@ const insertReindeer = () => {
 };
 let reindeer = insertReindeer();
 const reindeerCheck = (id) => {
-  reindeer.forEach((pos) => {
+  let isCorrect = false;
+  reindeer.forEach((pos, i) => {
     if (pos == id) {
-      return true;
+      isCorrect = true;
+      reindeer.splice(i, 1);
     }
   });
+  return isCorrect;
 };
 gameBoard.forEach((arr) =>
   arr.forEach((boardBox) => {
@@ -86,17 +92,30 @@ gameBoard.forEach((arr) =>
       moveSanta(e.target);
       e.target.disabled = true;
       const guess = reindeerCheck(e.target.id);
+      console.log(guess);
       //senare
-      // if (guess) {
-      //   // korrekt gissning, öka något
-      // } else {
-      // fel gissning öka något annat
-      // }
+      if (guess) {
+        correctCounter++;
+      } else {
+        guessesLeft--;
+      }
+      if (guessesLeft == 0) {
+        gameOver();
+      } else if (correctCounter == 10) {
+        gameWon();
+      }
       // alert(e.target.id);
     });
   })
 );
 
+const gameOver = () => {
+  alert("Game over!");
+};
+const gameWon = () => {
+  alert("Game won!");
+};
+const removeReindeer = (id) => {};
 // gameBoard.forEach((square) => {
 //   square.forEach((innerSquare, j) => {
 //     let div = document.createElement("div");
