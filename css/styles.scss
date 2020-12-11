@@ -1,0 +1,32 @@
+// reset
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+#gameBoard {
+    display: flex;
+    margin: 2rem;
+    padding: 1rem;
+    flex-flow: column wrap;
+    // justify-content: center;
+    align-items: stretch;
+}
+
+// div.row
+
+// div.boardBox
+
+// 8x8
+
+.boardBox {
+    display: inline-block;
+    height: 5rem;
+    width: 5rem;
+    border: 1px solid black;
+}
+
+.guessed {
+    background-color: grey;
+}
