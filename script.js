@@ -77,12 +77,22 @@ const insertReindeer = () => {
 let reindeer = insertReindeer();
 const reindeerCheck = (id) => {
   let isCorrect = false;
+  let reindeerIndex = "";
   reindeer.forEach((pos, i) => {
     if (pos == id) {
       isCorrect = true;
       reindeer.splice(i, 1);
+      reindeerIndex = pos;
     }
   });
+  gameBoard.forEach((arr) =>
+    arr.forEach((position) => {
+      if (position.id == reindeerIndex) {
+        position.classList.add("reindeer");
+        // position.disabled = true;
+      }
+    })
+  );
   return isCorrect;
 };
 gameBoard.forEach((arr) =>
