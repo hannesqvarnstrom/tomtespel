@@ -15,6 +15,7 @@
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+    width: 48rem;
 }
 
 .row {
@@ -25,6 +26,7 @@
     display: inline-block;
     height: 5rem;
     width: 5rem;
+    background: transparent;
     border: 2px solid rgb(55, 55, 55);
 }
 
@@ -35,9 +37,10 @@
 
 #tomte {
     background-image: url("/img/tomte.png");
-    background-size: cover;
-    height: 5rem;
-    width: 5rem;
+    background-size: contain;
+    background-position: center;
+    height: 4.7rem;
+    width: 4.7rem;
     border: 5px solid rgb(114, 26, 26);
     border-radius: 10%;
     // background: green;
