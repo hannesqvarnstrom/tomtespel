@@ -24,7 +24,7 @@ const printGameBoard = () => {
       arr[i][j] = div;
     }
   }
-  //   document.body.appendChild(gameBoard);
+  document.body.appendChild(gameBoard);
   return arr;
 };
 //-----------------
@@ -54,6 +54,7 @@ const showLastPos = (pos) => {
       if (position.id == pos) {
         console.log(position);
         position.classList.add("guessed");
+        position.disabled = true; //senare
       }
     })
   );
