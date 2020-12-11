@@ -16,7 +16,7 @@ const printGameBoard = () => {
     container.classList.add("row");
     gameBoard.appendChild(container);
     for (let j = 0; j < 8; j++) {
-      let div = document.createElement("div");
+      let div = document.createElement("button");
       div.classList.add("boardBox");
       //   div.setAttribute("id");
       div.setAttribute("id", `${i}` + `${j}`);
@@ -37,6 +37,7 @@ const moveSanta = (target) => {
     arr.forEach((position) => {
       if (position.id == santaPos) {
         position.innerHTML = "";
+        // position.disabled = true;
       }
     })
   );
@@ -54,17 +55,38 @@ const showLastPos = (pos) => {
       if (position.id == pos) {
         console.log(position);
         position.classList.add("guessed");
-        position.disabled = true; //senare
       }
     })
   );
+};
+const rngString = () => {
+  let part1 = Math.floor(Math.random() * 8).toString();
+  let part2 = Math.floor(Math.random() * 8).toString();
+  return part1 + part2;
+};
+const insertReindeer = () => {
+  let reindeers = [];
+  for (let i = 0; i < 10; i++) {
+    reindeers[i] = rngString();
+  }
+  return reindeers;
+};
+let reindeer = insertReindeer();
+const reindeerCheck = (id) => {
+  reindeer.forEach((pos) => {
+    if (pos == id) {
+      return true;
+    }
+  });
 };
 gameBoard.forEach((arr) =>
   arr.forEach((boardBox) => {
     boardBox.addEventListener("click", (e) => {
       showLastPos(santaPos);
       moveSanta(e.target);
-      // const guess = reindeerCheck();
+      e.target.disabled = true;
+      const guess = reindeerCheck(e.target.id);
+      //senare
       // if (guess) {
       //   // korrekt gissning, öka något
       // } else {
