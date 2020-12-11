@@ -32,13 +32,12 @@
 }
 
 #tomte {
-    background-color: green;
-    height: 50px;
-    width: 50px;
-    border-radius: 50%;
-    /* position: absolute;
-  top: 100px;
-  left: 100px; */
+    background-image: url("/img/tomte.png");
+    background-size: cover;
+    height: 5rem;
+    width: 5rem;
+    // background: green;
+    
 }
 
 .ren {
