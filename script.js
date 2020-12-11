@@ -142,6 +142,7 @@ const resetGame = () => {
   santaPos = "";
   gameBoard = "";
   reindeer = "";
+  document.querySelector("#counter").innerHTML = "";
   startGame();
 };
 // gameBoard.forEach((square) => {
